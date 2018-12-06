@@ -15,6 +15,8 @@ class Input extends React.Component {
         this.eventCreate = this.eventCreate.bind(this);
         this.moveTodone = this.moveTodone.bind(this);
         this.returnTodo = this.returnTodo.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
+        this.deleteDone = this.deleteDone.bind(this);
         this.newItemArray = [];
         this.doneItemArray = [];
         this.state = { 
@@ -64,20 +66,40 @@ class Input extends React.Component {
             doneitems: newDone
         })
     }
+    deleteTodo (e) {
+        var listItem = (e.target.value);
+        var toDo = this.state.todoitems;
+        console.log(listItem);
+        var selectedIndex = toDo.indexOf(listItem);
+        console.log(selectedIndex)
+        toDo.splice(selectedIndex, 1);
+        this.setState ({
+            todoitems: toDo
+        })
+    }
+    deleteDone (e) {
+        var listItem = (e.target.value);
+        var done = this.state.doneitems;
+        console.log(listItem);
+        var selectedIndex = done.indexOf(listItem);
+        console.log(selectedIndex)
+        done.splice(selectedIndex, 1);
+        this.setState ({
+            doneitems: done
+        })
+    }
     render () {
-        // var TodolistPlacement = this.state.isdone === false?: null;
-        // var DonelistPlacement = this.state.isdone?  : null;
         return (
             <div>
-                <h3 className="todoTitle">What do you need to get done? </h3>
+                <h3 className = "todoTitle">What do you need to get done: </h3>
                 <div className="inputFields">
-                    <input className="input" type = "text" placeholder="enter activity here" ref = {input => { this.textInput = input;}}/>
+                    <input className="input" placeholder="enter activity" type = "text" ref = {input => { this.textInput = input;}}/>
                     <input className="input" type = "date" ref = {input => { this.dateInput = input;}}/>
                     <input type = "submit" onClick = {this.eventCreate}/>
                 </div>
                 <div className="listContainer">
-                    <TodoListItem className="todo" newtodo = {this.state.todoitems} handleClick = {this.moveTodone}/>
-                    <DoneListItem className="done" newdone = {this.state.doneitems} handleClick = {this.returnTodo}/>
+                    <TodoListItem className="todo" newtodo = {this.state.todoitems} handleClick = {this.moveTodone} handleDelete = {this.deleteTodo}/>
+                    <DoneListItem className="done" newdone = {this.state.doneitems} handleClick = {this.returnTodo} handleDonedelete = {this.deleteDone}/>
                 </div>
             </div>
         );
@@ -87,14 +109,18 @@ class TodoListItem extends React.Component {
     constructor(props) {
         super (props)
         this.markDone = this.markDone.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
     markDone (e) {
         this.props.handleClick(e);
     }
+    deleteItem (e) {
+        this.props.handleDelete(e)
+    }
 
     render () {
         var items = this.props.newtodo.map(
-            (item) => <span key = {item + "todo"}><li key={item + "listitem"}>{item}</li><button type = "button" key={item + "button"} value={item} onClick = {this.markDone}>done</button></span>
+            (item) => <span key = {item + "todo"}><li key={item + "listitem"}>{item}</li><button type = "button" key={item + "done-button"} value={item} onClick = {this.markDone}>done</button><button type = "button" key = {item + "delete-todo"} value = {item} onClick = {this.deleteItem}></button></span>
         )
         return (
             <ol>
@@ -107,14 +133,18 @@ class DoneListItem extends React.Component {
     constructor(props) {
         super (props)
         this.markNotdone = this.markNotdone.bind(this);
+        this.deleteDoneitem = this.deleteDoneitem.bind(this)
     }
     markNotdone (e) {
         this.props.handleClick(e);
     }
+    deleteDoneitem (e) {
+        this.props.handleDonedelete(e);
+    }
 
     render () {
         var items = this.props.newdone.map(
-            (item) => <span key = {item + "done"}>Done<li key={item}>{item}</li><button type = "button" key={item + "button"} onClick = {this.markNotdone} value = {item}>not done</button></span>
+            (item) => <span key = {item + "done"}>Done<li key={item}>{item}</li><button type = "button" key={item + "button"} onClick = {this.markNotdone} value = {item}>not done</button><button type = "button" key = {item + "delete-completed"} value = {item} onClick = {this.deleteDoneitem}></button></span>
         )
         return (
             <ol className = "done">
