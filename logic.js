@@ -13,7 +13,8 @@ class Input extends React.Component {
     constructor (props){
         super(props)
         this.eventCreate = this.eventCreate.bind(this);
-        this.moveTodone = this.moveTodone.bind(this)
+        this.moveTodone = this.moveTodone.bind(this);
+        this.returnTodo = this.returnTodo.bind(this);
         this.newItemArray = [];
         this.doneItemArray = [];
         this.state = { 
@@ -48,6 +49,21 @@ class Input extends React.Component {
             // isdone: true
         })
     }
+    returnTodo (e) {
+        var text = (e.target.value);
+        console.log(text);
+        var newDone = this.state.doneitems;
+        console.log(newDone);
+        var selectedIndex = newDone.indexOf(text)
+        console.log(selectedIndex);
+        newDone.splice(selectedIndex, 1);
+        var notYetdone = this.state.todoitems;
+        notYetdone.push(text);
+        this.setState ({
+            todoitems: notYetdone,
+            doneitems: newDone
+        })
+    }
     render () {
         // var TodolistPlacement = this.state.isdone === false?: null;
         // var DonelistPlacement = this.state.isdone?  : null;
@@ -58,7 +74,7 @@ class Input extends React.Component {
                 <input type = "date" ref = {input => { this.dateInput = input;}}/>
                 <input type = "submit" onClick = {this.eventCreate}/>
                 <TodoListItem newtodo = {this.state.todoitems} handleClick = {this.moveTodone}/>
-                <DoneListItem newdone = {this.state.doneitems}/>
+                <DoneListItem newdone = {this.state.doneitems} handleClick = {this.returnTodo}/>
             </div>
         );
     }
@@ -86,12 +102,15 @@ class TodoListItem extends React.Component {
 class DoneListItem extends React.Component {
     constructor(props) {
         super (props)
+        this.markNotdone = this.markNotdone.bind(this);
+    }
+    markNotdone (e) {
+        this.props.handleClick(e);
     }
 
     render () {
-        console.log("Render DoneList")
         var items = this.props.newdone.map(
-            (item) => <span key = {item + "done"}>Done<li key={item}>{item}</li><button type = "button" key={item + "button"} onClick = {this.markNotdone}>not done</button></span>
+            (item) => <span key = {item + "done"}>Done<li key={item}>{item}</li><button type = "button" key={item + "button"} onClick = {this.markNotdone} value = {item}>not done</button></span>
         )
         return (
             <ul className = "done">
