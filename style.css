@@ -4,28 +4,71 @@ body {
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
-.container {
+/* .container {
     height: 500px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-top: -160px;
-}
+} */
+
 .title {
+    /* color: rgba(123, 206, 202, 0.541); */
+    /* background: -webkit-linear-gradient(rgb(10, 10, 10), rgb(46, 45, 45)); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
     font-family: 'Playfair Display', serif;
-    color: rgba(123, 206, 202, 0.541)
-}
-h1 {
     font-size: 40px;
-    background: -webkit-linear-gradient(rgb(10, 10, 10), rgb(46, 45, 45));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
 }
-.TodoEntry {
+
+/* .TodoEntry {
     display: block;
     margin-left: 75px;
+} */
+
+.todoTitle{
+    background-color: darkgrey;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
 }
-.done {
+
+.input{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* .done {
     color: "blue";
+} */
+
+.inputFields{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.listContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+    background-color: darkgray;
+}
+
+.todo {
+    background-color: red;
+    border-radius: 5px;
+}
+
+.done {
+    background-color: lightgreen;
+    border-radius: 5px;
 }
