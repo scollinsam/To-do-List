@@ -1,0 +1,31 @@
+body {
+    background-image: url(./images/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+}
+.container {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: -160px;
+}
+.title {
+    font-family: 'Playfair Display', serif;
+    color: rgba(123, 206, 202, 0.541)
+}
+h1 {
+    font-size: 40px;
+    background: -webkit-linear-gradient(rgb(10, 10, 10), rgb(46, 45, 45));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.TodoEntry {
+    display: block;
+    margin-left: 75px;
+}
+.done {
+    color: "blue";
+}
