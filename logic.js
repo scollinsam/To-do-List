@@ -170,7 +170,11 @@ class TodoListItem extends React.Component {
 
     render() {
         var items = this.props.newtodo.map(
-            (item) => <span key={item + "todo"}><li key={item + "listitem"}>{item}</li><button type="button" key={item + "done-button"} value={item} onClick={this.markDone}>done</button><button type="button" key={item + "delete-todo"} value={item} onClick={this.deleteItem}>Delete</button><button type="button" key={"delete" + item} value={item} onClick={this.favouriteItem}>Favourite</button></span>
+            (item) => 
+                <div>
+                    <span key={item + "todo"}><li className="listItem" key={item + "listitem"}>{item}</li><button type="button" key={item + "done-button"} value={item} onClick={this.markDone}>Complete</button><button type="button" key={item + "delete-todo"} value={item} onClick={this.deleteItem}>Delete</button><button type="button" key={"delete" + item} value={item} onClick={this.favouriteItem}>Favourite</button></span>
+                    <hr></hr>
+                </div>
         )
         return (
             <div>
@@ -198,7 +202,11 @@ class DoneListItem extends React.Component {
 
     render() {
         var items = this.props.newdone.map(
-            (item) => <span key={item + "done"}><li key={item}>{item}</li><button type="button" key={item + "button"} onClick={this.markNotdone} value={item}>not done</button><button type="button" key={item + "delete-completed"} value={item} onClick={this.deleteDoneitem}>Delete</button></span>
+            (item) => 
+            <div>
+                <span key={item + "done"}><li className="listItem" key={item}>{item}</li><button type="button" key={item + "button"} onClick={this.markNotdone} value={item}>Incomplete</button><button type="button" key={item + "delete-completed"} value={item} onClick={this.deleteDoneitem}>Delete</button></span>
+                <hr></hr>
+            </div>
         )
         return (
             <div>

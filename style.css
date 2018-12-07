@@ -134,8 +134,8 @@ ol {
     font-size: 10px;
 }
 
-.listContainer li:hover {
-    border: solid 1px black;
+.listItem:hover {
+    font-weight: 600;
 }
 
 .listContainer button:hover {
