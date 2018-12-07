@@ -142,12 +142,16 @@ class Input extends React.Component {
     render () {
         return (
             <div>
-                <h3 className = "TodoEntry">What do you need to do: </h3>
-                <input type = "text" ref = {input => { this.textInput = input;}}/>
-                <input type = "date" ref = {input => { this.dateInput = input;}}/>
-                <input type = "submit" onClick = {this.eventCreate}/>
-                <TodoListItem newtodo = {this.state.todoitems} handleClick = {this.moveTodone} handleDelete = {this.deleteTodo}/>
-                <DoneListItem newdone = {this.state.doneitems} handleClick = {this.returnTodo} handleDonedelete = {this.deleteDone}/>
+                <h3 className = "todoTitle">What do you need to get done: </h3>
+                <div className="inputFields">
+                    <input className="input" placeholder="enter activity" type = "text" ref = {input => { this.textInput = input;}}/>
+                    <input className="input" type = "date" ref = {input => { this.dateInput = input;}}/>
+                    <input type = "submit" onClick = {this.eventCreate}/>
+                </div>
+                <div className="listContainer">
+                    <TodoListItem className="todo" newtodo = {this.state.todoitems} handleClick = {this.moveTodone} handleDelete = {this.deleteTodo}/>
+                    <DoneListItem className="done" newdone = {this.state.doneitems} handleClick = {this.returnTodo} handleDonedelete = {this.deleteDone}/>
+                </div>
             </div>
         );
     }
@@ -170,9 +174,9 @@ class TodoListItem extends React.Component {
             (item) => <span key = {item + "todo"}><li key={item + "listitem"}>{item}</li><button type = "button" key={item + "done-button"} value={item} onClick = {this.markDone}>done</button><button type = "button" key = {item + "delete-todo"} value = {item} onClick = {this.deleteItem}>Delete</button></span>
         )
         return (
-            <ul>
+            <ol>
                 {items}
-            </ul>
+            </ol>
         )
     }
 }
@@ -194,9 +198,9 @@ class DoneListItem extends React.Component {
             (item) => <span key = {item + "done"}>Done<li key={item}>{item}</li><button type = "button" key={item + "button"} onClick = {this.markNotdone} value = {item}>not done</button><button type = "button" key = {item + "delete-completed"} value = {item} onClick = {this.deleteDoneitem}>Delete</button></span>
         )
         return (
-            <ul className = "done">
+            <ol className = "done">
                 {items}
-            </ul>
+            </ol>
         )
     }
 }
