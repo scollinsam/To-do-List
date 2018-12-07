@@ -17,7 +17,7 @@ class Input extends React.Component {
         this.returnTodo = this.returnTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.deleteDone = this.deleteDone.bind(this);
-        this.prependFavourite = this.prependFavourite.bind(this)
+        this.prioritizeFavourite = this.prioritizeFavourite.bind(this)
         this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
         this.hydrateStateWithLocalStorage = this.hydrateStateWithLocalStorage.bind(this);
         this.newItemArray = [];
@@ -86,14 +86,16 @@ class Input extends React.Component {
             doneitems: done
         })
     }
-    prependFavourite (e) {
-        var starredItem = (e.target.value);
+    prioritizeFavourite (e) {
+        var starredItem = e.target.value;
         var toDo = this.state.todoitems;
         var selectedIndex = toDo.indexOf(starredItem);
-        toDo.prepend(selectedIndex);
+        toDo.splice(selectedIndex, 1);
+        toDo.unshift(starredItem);
         this.setState ({
             todoitems: toDo
         })
+        console.log("function")
     }
     hydrateStateWithLocalStorage() {
         // for all items in state
@@ -143,7 +145,7 @@ class Input extends React.Component {
                     <input type = "submit" onClick = {this.eventCreate}/>
                 </div>
                 <div className="listContainer">
-                    <TodoListItem className="todo" newtodo = {this.state.todoitems} handleClick = {this.moveTodone} handleDelete = {this.deleteTodo} handeFavourite = {this.prependFavourite}/>
+                    <TodoListItem className="todo" newtodo = {this.state.todoitems} handleClick = {this.moveTodone} handleDelete = {this.deleteTodo} handleFavourite = {this.prioritizeFavourite}/>
                     <DoneListItem className="done" newdone = {this.state.doneitems} handleClick = {this.returnTodo} handleDonedelete = {this.deleteDone}/>
                 </div>
             </div>
@@ -164,7 +166,7 @@ class TodoListItem extends React.Component {
         this.props.handleDelete(e)
     }
     favouriteItem (e) {
-        this.props.handeFavourite(e)
+        this.props.handleFavourite(e)
     }
 
     render () {
