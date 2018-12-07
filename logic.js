@@ -17,6 +17,7 @@ class Input extends React.Component {
         this.returnTodo = this.returnTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.deleteDone = this.deleteDone.bind(this);
+        this.prependFavourite = this.prependFavourite.bind(this)
         this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
         this.hydrateStateWithLocalStorage = this.hydrateStateWithLocalStorage.bind(this);
         this.newItemArray = [];
@@ -42,35 +43,23 @@ class Input extends React.Component {
         this.setState ({
             todoitems: this.newItemArray
         })
-        // save new array to local storage
-            // localStorage.setItem("list", JSON.stringify(list));
-    // localStorage.setItem("newItem", "");
     }
     moveTodone (e) {
-        console.log(e.target.parentNode);
-        console.log(this.state.todoitems)
         var text = (e.target.value);
-        console.log(text);
         var newTodo = this.state.todoitems;
         var selectedIndex = newTodo.indexOf(text);
         newTodo.splice(selectedIndex, 1);
-        // var newItem = e.target.value;
-        // console.log(e.target.value);
         var newCompleted = this.state.doneitems;
         newCompleted.push(text);
         this.setState ({
             doneitems: newCompleted,
             todoitems: newTodo
-            // isdone: true
         })
     }
     returnTodo (e) {
         var text = (e.target.value);
-        console.log(text);
         var newDone = this.state.doneitems;
-        console.log(newDone);
         var selectedIndex = newDone.indexOf(text)
-        console.log(selectedIndex);
         newDone.splice(selectedIndex, 1);
         var notYetdone = this.state.todoitems;
         notYetdone.push(text);
@@ -82,9 +71,7 @@ class Input extends React.Component {
     deleteTodo (e) {
         var listItem = (e.target.value);
         var toDo = this.state.todoitems;
-        console.log(listItem);
         var selectedIndex = toDo.indexOf(listItem);
-        console.log(selectedIndex)
         toDo.splice(selectedIndex, 1);
         this.setState ({
             todoitems: toDo
@@ -93,12 +80,19 @@ class Input extends React.Component {
     deleteDone (e) {
         var listItem = (e.target.value);
         var done = this.state.doneitems;
-        console.log(listItem);
         var selectedIndex = done.indexOf(listItem);
-        console.log(selectedIndex)
         done.splice(selectedIndex, 1);
         this.setState ({
             doneitems: done
+        })
+    }
+    prependFavourite (e) {
+        var starredItem = (e.target.value);
+        var toDo = this.state.todoitems;
+        var selectedIndex = toDo.indexOf(starredItem);
+        toDo.prepend(selectedIndex);
+        this.setState ({
+            todoitems: toDo
         })
     }
     hydrateStateWithLocalStorage() {
@@ -149,7 +143,7 @@ class Input extends React.Component {
                     <input type = "submit" onClick = {this.eventCreate}/>
                 </div>
                 <div className="listContainer">
-                    <TodoListItem className="todo" newtodo = {this.state.todoitems} handleClick = {this.moveTodone} handleDelete = {this.deleteTodo}/>
+                    <TodoListItem className="todo" newtodo = {this.state.todoitems} handleClick = {this.moveTodone} handleDelete = {this.deleteTodo} handeFavourite = {this.prependFavourite}/>
                     <DoneListItem className="done" newdone = {this.state.doneitems} handleClick = {this.returnTodo} handleDonedelete = {this.deleteDone}/>
                 </div>
             </div>
@@ -161,6 +155,7 @@ class TodoListItem extends React.Component {
         super (props)
         this.markDone = this.markDone.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.favouriteItem = this.favouriteItem.bind(this);
     }
     markDone (e) {
         this.props.handleClick(e);
@@ -168,10 +163,13 @@ class TodoListItem extends React.Component {
     deleteItem (e) {
         this.props.handleDelete(e)
     }
+    favouriteItem (e) {
+        this.props.handeFavourite(e)
+    }
 
     render () {
         var items = this.props.newtodo.map(
-            (item) => <span key = {item + "todo"}><li key={item + "listitem"}>{item}</li><button type = "button" key={item + "done-button"} value={item} onClick = {this.markDone}>done</button><button type = "button" key = {item + "delete-todo"} value = {item} onClick = {this.deleteItem}>Delete</button></span>
+            (item) => <span key = {item + "todo"}><li key={item + "listitem"}>{item}</li><button type = "button" key={item + "done-button"} value={item} onClick = {this.markDone}>done</button><button type = "button" key = {item + "delete-todo"} value = {item} onClick = {this.deleteItem}>Delete</button><button type = "button" key = {"delete" + item} value = {item} onClick = {this.favouriteItem}>Favourite</button></span>
         )
         return (
             <ol>
