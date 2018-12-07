@@ -133,3 +133,13 @@ ol {
 .listContainer button {
     font-size: 10px;
 }
+
+.listContainer li:hover {
+    border: solid 1px black;
+}
+
+.listContainer button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}

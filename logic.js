@@ -198,7 +198,7 @@ class DoneListItem extends React.Component {
 
     render() {
         var items = this.props.newdone.map(
-            (item) => <span key={item + "done"}>Done<li key={item}>{item}</li><button type="button" key={item + "button"} onClick={this.markNotdone} value={item}>not done</button><button type="button" key={item + "delete-completed"} value={item} onClick={this.deleteDoneitem}>Delete</button></span>
+            (item) => <span key={item + "done"}><li key={item}>{item}</li><button type="button" key={item + "button"} onClick={this.markNotdone} value={item}>not done</button><button type="button" key={item + "delete-completed"} value={item} onClick={this.deleteDoneitem}>Delete</button></span>
         )
         return (
             <div>
