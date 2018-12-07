@@ -17,6 +17,8 @@ class Input extends React.Component {
         this.returnTodo = this.returnTodo.bind(this);
         this.deleteTodo = this.deleteTodo.bind(this);
         this.deleteDone = this.deleteDone.bind(this);
+        this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
+        this.hydrateStateWithLocalStorage = this.hydrateStateWithLocalStorage.bind(this);
         this.newItemArray = [];
         this.doneItemArray = [];
         this.state = { 
@@ -26,12 +28,23 @@ class Input extends React.Component {
             isdone: false
         }
     }
+    saveStateToLocalStorage() {
+        // for every item in React state
+        for (let key in this.state) {
+          // save to localStorage
+          localStorage.setItem(key, JSON.stringify(this.state[key]));
+        }
+      }
     eventCreate () {
+        this.newItemArray = this.state.todoitems;
         var activities = this.textInput.value + this.dateInput.value;
         this.newItemArray.push(activities);
         this.setState ({
             todoitems: this.newItemArray
         })
+        // save new array to local storage
+            // localStorage.setItem("list", JSON.stringify(list));
+    // localStorage.setItem("newItem", "");
     }
     moveTodone (e) {
         console.log(e.target.parentNode);
@@ -88,6 +101,44 @@ class Input extends React.Component {
             doneitems: done
         })
     }
+    hydrateStateWithLocalStorage() {
+        // for all items in state
+        for (let key in this.state) {
+          // if the key exists in localStorage
+          if (localStorage.hasOwnProperty(key)) {
+            // get the key's value from localStorage
+            let value = localStorage.getItem(key);
+    
+            // parse the localStorage string and setState
+            try {
+              value = JSON.parse(value);
+              this.setState({ [key]: value });
+            } catch (e) {
+              // handle empty string
+              this.setState({ [key]: value });
+            }
+          }
+        }
+      }
+      componentDidMount() {
+        this.hydrateStateWithLocalStorage();
+    
+        // add event listener to save state to localStorage
+        // when user leaves/refreshes the page
+        window.addEventListener(
+          "beforeunload",
+          this.saveStateToLocalStorage.bind(this)
+        );
+      }
+      componentWillUnmount() {
+        window.removeEventListener(
+          "beforeunload",
+          this.saveStateToLocalStorage.bind(this)
+        );
+    
+        // saves if component has a chance to unmount
+        this.saveStateToLocalStorage();
+    }
     render () {
         return (
             <div>
@@ -116,7 +167,7 @@ class TodoListItem extends React.Component {
 
     render () {
         var items = this.props.newtodo.map(
-            (item) => <span key = {item + "todo"}><li key={item + "listitem"}>{item}</li><button type = "button" key={item + "done-button"} value={item} onClick = {this.markDone}>done</button><button type = "button" key = {item + "delete-todo"} value = {item} onClick = {this.deleteItem}></button></span>
+            (item) => <span key = {item + "todo"}><li key={item + "listitem"}>{item}</li><button type = "button" key={item + "done-button"} value={item} onClick = {this.markDone}>done</button><button type = "button" key = {item + "delete-todo"} value = {item} onClick = {this.deleteItem}>Delete</button></span>
         )
         return (
             <ul>
@@ -140,7 +191,7 @@ class DoneListItem extends React.Component {
 
     render () {
         var items = this.props.newdone.map(
-            (item) => <span key = {item + "done"}>Done<li key={item}>{item}</li><button type = "button" key={item + "button"} onClick = {this.markNotdone} value = {item}>not done</button><button type = "button" key = {item + "delete-completed"} value = {item} onClick = {this.deleteDoneitem}></button></span>
+            (item) => <span key = {item + "done"}>Done<li key={item}>{item}</li><button type = "button" key={item + "button"} onClick = {this.markNotdone} value = {item}>not done</button><button type = "button" key = {item + "delete-completed"} value = {item} onClick = {this.deleteDoneitem}>Delete</button></span>
         )
         return (
             <ul className = "done">
