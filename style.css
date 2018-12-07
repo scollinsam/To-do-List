@@ -1,3 +1,7 @@
+#root {
+    width: 100%;
+}
+
 body {
     background-image: url(./images/background.jpg);
     background-size: cover;
@@ -13,6 +17,16 @@ body {
     flex-direction: column;
     margin-top: -160px;
 } */
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.td-navbar {
+    text-align: right;
+}
 
 .title {
     /* color: rgba(123, 206, 202, 0.541); */
