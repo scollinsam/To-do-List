@@ -24,8 +24,39 @@ body {
     margin-right: 10px;
 }
 
-.td-navbar {
-    text-align: right;
+.logo {
+    height: 25%;
+    width: 25%;
+}
+
+.text-hunt {
+    color: white;
+    font-size: 40px;
+    font-weight: 800;
+    text-shadow: 1px 1px 0 #000,
+    -1px 1px 0 #000,
+    1px -1px 0 #000,
+    -1px -1px 0 #000,
+    0px 1px 0 #000,
+    0px -1px 0 #000,
+    -1px 0px 0 #000,
+    1px 0px 0 #000,
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0px 2px 0 #000,
+    0px -2px 0 #000,
+    -2px 0px 0 #000,
+    2px 0px 0 #000,
+    1px 2px 0 #000,
+    -1px 2px 0 #000,
+    1px -2px 0 #000,
+    -1px -2px 0 #000,
+    2px 1px 0 #000,
+    -2px 1px 0 #000,
+    2px -1px 0 #000,
+    -2px -1px 0 #000;
 }
 
 .title {
@@ -47,6 +78,12 @@ body {
     display: block;
     margin-left: 75px;
 } */
+
+.listTitle {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+}
 
 .todoTitle{
     background-color: darkgrey;
@@ -74,6 +111,7 @@ body {
 .listContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
     text-align: left;
     background-color: darkgray;
 }
@@ -86,4 +124,12 @@ body {
 .done {
     background-color: lightgreen;
     border-radius: 5px;
+}
+
+ol {
+    list-style-image: url('./images/bullet-falcon.png');
+}
+
+.listContainer button {
+    font-size: 10px;
 }

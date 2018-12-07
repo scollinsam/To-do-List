@@ -2,9 +2,8 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div>
                 <NavBar />
-                <h1 className="title">Welcome to your To-do List</h1>
                 <Input />
             </div>
         )
@@ -87,13 +86,13 @@ class Input extends React.Component {
             doneitems: done
         })
     }
-    prioritizeFavourite (e) {
+    prioritizeFavourite(e) {
         var starredItem = e.target.value;
         var toDo = this.state.todoitems;
         var selectedIndex = toDo.indexOf(starredItem);
         toDo.splice(selectedIndex, 1);
         toDo.unshift(starredItem);
-        this.setState ({
+        this.setState({
             todoitems: toDo
         })
         console.log("function")
@@ -139,15 +138,14 @@ class Input extends React.Component {
     render() {
         return (
             <div>
-                <h3 className="todoTitle">What do you need to get done: </h3>
                 <div className="inputFields">
                     <input className="input" placeholder="enter activity" type="text" ref={input => { this.textInput = input; }} />
                     <input className="input" type="date" ref={input => { this.dateInput = input; }} />
-                    <input type="submit" onClick={this.eventCreate} />
+                    <input type="submit" value="Add" onClick={this.eventCreate} />
                 </div>
                 <div className="listContainer">
-                    <TodoListItem className="todo" newtodo = {this.state.todoitems} handleClick = {this.moveTodone} handleDelete = {this.deleteTodo} handleFavourite = {this.prioritizeFavourite}/>
-                    <DoneListItem className="done" newdone = {this.state.doneitems} handleClick = {this.returnTodo} handleDonedelete = {this.deleteDone}/>
+                    <TodoListItem className="todo" newtodo={this.state.todoitems} handleClick={this.moveTodone} handleDelete={this.deleteTodo} handleFavourite={this.prioritizeFavourite} />
+                    <DoneListItem className="done" newdone={this.state.doneitems} handleClick={this.returnTodo} handleDonedelete={this.deleteDone} />
                 </div>
             </div>
         );
@@ -166,7 +164,7 @@ class TodoListItem extends React.Component {
     deleteItem(e) {
         this.props.handleDelete(e)
     }
-    favouriteItem (e) {
+    favouriteItem(e) {
         this.props.handleFavourite(e)
     }
 
@@ -175,9 +173,13 @@ class TodoListItem extends React.Component {
             (item) => <span key={item + "todo"}><li key={item + "listitem"}>{item}</li><button type="button" key={item + "done-button"} value={item} onClick={this.markDone}>done</button><button type="button" key={item + "delete-todo"} value={item} onClick={this.deleteItem}>Delete</button><button type="button" key={"delete" + item} value={item} onClick={this.favouriteItem}>Favourite</button></span>
         )
         return (
-            <ol>
-                {items}
-            </ol>
+            <div>
+                <p className="listTitle">TODO:</p>
+                <ol>
+                    {items}
+                </ol>
+            </div>
+            
         )
     }
 }
@@ -199,9 +201,12 @@ class DoneListItem extends React.Component {
             (item) => <span key={item + "done"}>Done<li key={item}>{item}</li><button type="button" key={item + "button"} onClick={this.markNotdone} value={item}>not done</button><button type="button" key={item + "delete-completed"} value={item} onClick={this.deleteDoneitem}>Delete</button></span>
         )
         return (
-            <ol className="done">
-                {items}
-            </ol>
+            <div>
+                <p className="listTitle">Done:</p>
+                <ol className="done">
+                    {items}
+                </ol>
+            </div>
         )
     }
 }
@@ -209,25 +214,31 @@ class DoneListItem extends React.Component {
 class NavBar extends React.Component {
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="#">
-                <img src="http://www.pngmart.com/files/6/Peregrine-Falcon-PNG-Free-Download.png" className="d-inline-block align-top icon" alt=""/>
-                    Falcon List
-                </a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul className="navbar-nav td-navbar">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Marked Important <span className="sr-only">(current)</span></a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">About</a>
-                        </li>
-                    </ul>
+            <div>
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a className="navbar-brand" href="#">
+                        <img src="http://www.pngmart.com/files/6/Peregrine-Falcon-PNG-Free-Download.png" className="d-inline-block align-top icon" alt="" />
+                        Falcon List
+                    </a>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul className="navbar-nav td-navbar">
+                            <li className="nav-item active">
+                                <a className="nav-link" href="#">Marked Important <span className="sr-only">(current)</span></a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div>
+                    <img src="http://pngimg.com/uploads/falcon/falcon_PNG28.png" className="d-inline-block align-top logo" alt="" />
+                    <p className="text-hunt" >Hunt down your tasks!</p>
                 </div>
-            </nav>
+            </div>
         )
     }
 }
