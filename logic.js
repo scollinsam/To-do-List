@@ -38,7 +38,7 @@ class Input extends React.Component {
     }
     eventCreate() {
         this.newItemArray = this.state.todoitems;
-        var activities = this.textInput.value + this.dateInput.value;
+        var activities = this.textInput.value + " by " + this.dateInput.value;
         this.newItemArray.push(activities);
         this.setState({
             todoitems: this.newItemArray
