@@ -72,7 +72,7 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .listContainer {
@@ -80,6 +80,7 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 25px;
     text-align: left;
+    background-color: rgb(169,169,169, .75);
 }
 
 .done {

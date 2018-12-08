@@ -95,7 +95,6 @@ class Input extends React.Component {
         this.setState({
             todoitems: toDo
         })
-        console.log("function")
     }
     hydrateStateWithLocalStorage() {
         // for all items in state
@@ -188,7 +187,7 @@ class TodoListItem extends React.Component {
         )
         return (
             <div>
-                <p className="listTitle shadow">TODO:</p>
+                <p className="listTitle shadow">ToDo:</p>
                 <ol>
                     {items}
                 </ol>
@@ -238,7 +237,7 @@ class NavBar extends React.Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <a className="navbar-brand" href="#">
-                        <img src="http://www.pngmart.com/files/6/Peregrine-Falcon-PNG-Free-Download.png" className="d-inline-block align-top icon" alt="" />
+                        <img src="./images/icon-falcon.png" className="d-inline-block align-top icon" alt="" />
                         Peregrine Tracker
                     </a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -256,7 +255,7 @@ class NavBar extends React.Component {
                     </div>
                 </nav>
                 <div>
-                    <img src="http://pngimg.com/uploads/falcon/falcon_PNG28.png" className="d-inline-block align-top logo" alt="" />
+                    <img src="./images/logo-falcon.png" className="d-inline-block align-top logo" alt="" />
                     <p className="text-hunt shadow" >Hunt down your tasks!</p>
                 </div>
             </div>
