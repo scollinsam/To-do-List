@@ -172,7 +172,12 @@ class TodoListItem extends React.Component {
         var items = this.props.newtodo.map(
             (item) => 
                 <div>
-                    <span key={item + "todo"}><li className="listItem" key={item + "listitem"}>{item}</li><button type="button" key={item + "done-button"} value={item} onClick={this.markDone}>Complete</button><button type="button" key={item + "delete-todo"} value={item} onClick={this.deleteItem}>Delete</button><button type="button" key={"delete" + item} value={item} onClick={this.favouriteItem}>Favourite</button></span>
+                    <span key={item + "todo"}>
+                        <li className="listItem" key={item + "listitem"}>{item}</li>
+                        <button type="button" key={item + "done-button"} value={item} onClick={this.markDone}>Complete</button>
+                        <button type="button" key={item + "delete-todo"} value={item} onClick={this.deleteItem}>Delete</button>
+                        <button type="button" key={"delete" + item} value={item} onClick={this.favouriteItem}>Favourite</button>
+                    </span>
                     <hr></hr>
                 </div>
         )
@@ -204,14 +209,18 @@ class DoneListItem extends React.Component {
         var items = this.props.newdone.map(
             (item) => 
             <div>
-                <span key={item + "done"}><li className="listItem" key={item}>{item}</li><button type="button" key={item + "button"} onClick={this.markNotdone} value={item}>Incomplete</button><button type="button" key={item + "delete-completed"} value={item} onClick={this.deleteDoneitem}>Delete</button></span>
+                <span key={item + "done"}>
+                    <li className="listItem done" key={item}>{item}</li>
+                    <button type="button" key={item + "button"} onClick={this.markNotdone} value={item}>Incomplete</button>
+                    <button type="button" key={item + "delete-completed"} value={item} onClick={this.deleteDoneitem}>Delete</button>
+                </span>
                 <hr></hr>
             </div>
         )
         return (
             <div>
                 <p className="listTitle">Done:</p>
-                <ol className="done">
+                <ol>
                     {items}
                 </ol>
             </div>
