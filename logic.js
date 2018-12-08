@@ -144,8 +144,12 @@ class Input extends React.Component {
                     <input type="submit" value="Add" onClick={this.eventCreate} />
                 </div>
                 <div className="listContainer">
-                    <TodoListItem className="todo" newtodo={this.state.todoitems} handleClick={this.moveTodone} handleDelete={this.deleteTodo} handleFavourite={this.prioritizeFavourite} />
-                    <DoneListItem className="done" newdone={this.state.doneitems} handleClick={this.returnTodo} handleDonedelete={this.deleteDone} />
+                    <div className="todoListContainer">
+                        <TodoListItem  newtodo={this.state.todoitems} handleClick={this.moveTodone} handleDelete={this.deleteTodo} handleFavourite={this.prioritizeFavourite} />
+                    </div>
+                    <div className="doneListContainer">
+                        <DoneListItem newdone={this.state.doneitems} handleClick={this.returnTodo} handleDonedelete={this.deleteDone} />  
+                    </div>
                 </div>
             </div>
         );
@@ -174,16 +178,17 @@ class TodoListItem extends React.Component {
                 <div>
                     <span key={item + "todo"}>
                         <li className="listItem" key={item + "listitem"}>{item}</li>
-                        <button type="button" key={item + "done-button"} value={item} onClick={this.markDone}>Complete</button>
-                        <button type="button" key={item + "delete-todo"} value={item} onClick={this.deleteItem}>Delete</button>
-                        <button type="button" key={"delete" + item} value={item} onClick={this.favouriteItem}>Favourite</button>
+                        <div className="liButtons">
+                            <button type="button" key={item + "done-button"} value={item} onClick={this.markDone}>Complete</button>
+                            <button type="button" key={item + "delete-todo"} value={item} onClick={this.deleteItem}>Delete</button>
+                            <input id="favorite" type="image" src="./images/favorite.png" key={"delete" + item} value={item} onClick={this.favouriteItem} />
+                        </div>
                     </span>
-                    <hr></hr>
                 </div>
         )
         return (
             <div>
-                <p className="listTitle">TODO:</p>
+                <p className="listTitle shadow">TODO:</p>
                 <ol>
                     {items}
                 </ol>
@@ -214,12 +219,11 @@ class DoneListItem extends React.Component {
                     <button type="button" key={item + "button"} onClick={this.markNotdone} value={item}>Incomplete</button>
                     <button type="button" key={item + "delete-completed"} value={item} onClick={this.deleteDoneitem}>Delete</button>
                 </span>
-                <hr></hr>
             </div>
         )
         return (
             <div>
-                <p className="listTitle">Done:</p>
+                <p className="listTitle shadow">Done:</p>
                 <ol>
                     {items}
                 </ol>
@@ -235,7 +239,7 @@ class NavBar extends React.Component {
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <a className="navbar-brand" href="#">
                         <img src="http://www.pngmart.com/files/6/Peregrine-Falcon-PNG-Free-Download.png" className="d-inline-block align-top icon" alt="" />
-                        Falcon List
+                        Peregrine Tracker
                     </a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -253,7 +257,7 @@ class NavBar extends React.Component {
                 </nav>
                 <div>
                     <img src="http://pngimg.com/uploads/falcon/falcon_PNG28.png" className="d-inline-block align-top logo" alt="" />
-                    <p className="text-hunt" >Hunt down your tasks!</p>
+                    <p className="text-hunt shadow" >Hunt down your tasks!</p>
                 </div>
             </div>
         )

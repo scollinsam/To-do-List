@@ -9,14 +9,8 @@ body {
     display: flex;
     justify-content: center;
     text-align: center;
+    font-family: Helvetica, Arial, sans-serif
 }
-/* .container {
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: -160px;
-} */
 
 .icon {
     width: 30px;
@@ -33,6 +27,9 @@ body {
     color: white;
     font-size: 40px;
     font-weight: 800;
+}
+
+.shadow {
     text-shadow: 1px 1px 0 #000,
     -1px 1px 0 #000,
     1px -1px 0 #000,
@@ -59,47 +56,17 @@ body {
     -2px -1px 0 #000;
 }
 
-.title {
-    /* color: rgba(123, 206, 202, 0.541); */
-    /* background: -webkit-linear-gradient(rgb(10, 10, 10), rgb(46, 45, 45)); */
-    /* -webkit-background-clip: text; */
-    /* -webkit-text-fill-color: transparent; */
-    font-family: 'Playfair Display', serif;
-    font-size: 40px;
-    padding: 5px;
-    background-color: black;
-    color: white;
-    padding-left: 15px;
-    padding-right: 15px;
-    border-radius: 5px;
-}
-
-/* .TodoEntry {
-    display: block;
-    margin-left: 75px;
-} */
-
 .listTitle {
-    font-size: 20px;
+    color: white;
+    font-size: 30px;
     text-align: center;
     font-weight: 500;
-}
-
-.todoTitle{
-    background-color: darkgrey;
-    color: black;
-    border-radius: 5px;
-    padding: 5px;
 }
 
 .input{
     margin-left: 10px;
     margin-right: 10px;
 }
-
-/* .done {
-    color: "blue";
-} */
 
 .inputFields{
     align-items: center;
@@ -111,27 +78,31 @@ body {
 .listContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border: 1px solid black;
+    grid-column-gap: 25px;
     text-align: left;
-    background-color: darkgray;
-}
-
-.todo {
-    background-color: red;
-    border-radius: 5px;
 }
 
 .done {
     background-color: lightgreen;
     border-radius: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 ol {
     list-style-image: url('./images/bullet-falcon.png');
+    background-color: lightgray;
+    border-radius: 5px;
+    padding-top: 5px;
+}
+
+ol div {
+    display: flex;
+    margin-bottom: 10px;
 }
 
 .listContainer button {
-    font-size: 10px;
+    font-size: 8px;
 }
 
 .listItem:hover {
@@ -142,4 +113,23 @@ ol {
     cursor: pointer;
     background-color: black;
     color: white;
+}
+
+#favorite{
+    height: 15px;
+    width: 15px;
+    margin-left: 10px;
+}
+
+.liButtons {
+    display: flex;
+}
+
+li {
+    animation: fade 1s;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
